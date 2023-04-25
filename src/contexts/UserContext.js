@@ -15,6 +15,7 @@ const auth = getAuth(app);
 
 const UserContext = ({ children }) => {
   const [user, setUser] = useState({});
+  const [loader, setLoader] = useState(true);
 
   const googleProvider = new GoogleAuthProvider();
 
@@ -37,6 +38,7 @@ const UserContext = ({ children }) => {
   useEffect(() => {
     const subscription = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      setLoader(false);
     });
     return () => {
       subscription();
@@ -49,6 +51,7 @@ const UserContext = ({ children }) => {
     signInUser,
     signOutUser,
     signInWithGoogle,
+    loader,
   };
 
   return (
