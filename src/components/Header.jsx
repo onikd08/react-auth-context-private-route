@@ -28,12 +28,18 @@ const Header = () => {
           Register
         </Link>
         <p className="normal-case text-xl">Welcome {user?.email}</p>
-        <button
-          onClick={handleSignOutUser}
-          className="btn btn-ghost normal-case text-sm"
-        >
-          sign out
-        </button>
+        {user?.email ? (
+          <button
+            onClick={handleSignOutUser}
+            className="btn btn-ghost normal-case text-sm"
+          >
+            Logout
+          </button>
+        ) : (
+          <button className="btn btn-ghost normal-case text-sm">
+            <Link to="/login">Login</Link>
+          </button>
+        )}
       </div>
     </div>
   );
