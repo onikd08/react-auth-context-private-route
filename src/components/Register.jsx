@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/UserContext";
 
 const Register = () => {
   const { createUser, signInWithGoogle } = useContext(AuthContext);
+
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -14,6 +16,7 @@ const Register = () => {
     createUser(email, password)
       .then((result) => {
         const user = result.user;
+        navigate("/");
         console.log(user);
         form.reset();
       })
@@ -26,6 +29,7 @@ const Register = () => {
     signInWithGoogle()
       .then((result) => {
         const user = result.user;
+        navigate("/");
         console.log(user);
       })
       .catch((err) => console.log(err.message));
